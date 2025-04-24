@@ -13,6 +13,8 @@
   <h1>📖 読書ルーレット</h1>
   <div id="slot">スタートを押してください！\nPress Start!</div>
   <button onclick="startRoulette()">Start</button>
+  <audio id="startSound" src="drumroll.mp3" preload="auto"></audio>
+  <audio id="endSound" src="j.mp3" preload="auto"></audio>
 
   <script>
     const themes = [
@@ -29,12 +31,16 @@
     ];
 
     function startRoulette() {
+      document.getElementById('startSound').play();
       let i = 0;
       const slot = document.getElementById('slot');
       const interval = setInterval(() => {
         slot.innerText = themes[Math.floor(Math.random() * themes.length)];
         i++;
-        if (i > 30) clearInterval(interval);
+        if (i > 30) {
+          clearInterval(interval);
+          document.getElementById('endSound').play();
+        }
       }, 100);
     }
   </script>
